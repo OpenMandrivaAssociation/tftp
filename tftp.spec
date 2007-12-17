@@ -7,7 +7,6 @@ Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.bz2
 Source1: 	tftp-xinetd
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
