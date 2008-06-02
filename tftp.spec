@@ -57,7 +57,7 @@ mkdir -p %{buildroot}%{_mandir}/man{1,8}
 mkdir -p %{buildroot}%{_sbindir}
 
 make INSTALLROOT=%{buildroot} MANDIR=%{_mandir} install
-install -m755 -d %{buildroot}%{_localstatedir}/tftpboot/
+install -m755 -d %{buildroot}%{_localstatedir}/lib/tftpboot/
 install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 
 %post server
@@ -76,7 +76,7 @@ rm -rf %{buildroot}
 
 %files server
 %defattr(-,root,root)
-%dir %{_localstatedir}/tftpboot
+%dir %{_localstatedir}/lib/tftpboot
 %config(noreplace) %{_sysconfdir}/xinetd.d/tftp
 %{_sbindir}/in.tftpd
 %{_mandir}/man8/*
