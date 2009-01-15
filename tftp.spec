@@ -1,6 +1,6 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
-Version: 	0.48
+Version: 	0.49
 Release: 	%mkrel 1
 License: 	BSD
 Group: 		System/Servers
@@ -14,7 +14,7 @@ The Trivial File Transfer Protocol (TFTP) is normally used only for booting
 diskless workstations. The tftp package provides the user interface for TFTP,
 which allows users to transfer files to and from a remote machine. This
 program, and TFTP, provide very little security, and should not be enabled
-unless it is expressly needed. 
+unless it is expressly needed.
 
 %package	server
 Summary:	The server for the Trivial File Transfer Protocol (TFTP)
@@ -47,7 +47,7 @@ perl -pi -e '
     s,^SBINDIR=.*$,SBINDIR=%{_sbindir},;
     ' MCONFIG
 
-%make 
+%make
 
 %install
 rm -rf %{buildroot}
