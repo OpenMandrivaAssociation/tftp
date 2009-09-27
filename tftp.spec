@@ -1,12 +1,13 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
 Version: 	5.0
-Release: 	%mkrel 2
+Release: 	%mkrel 3
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.gz
 Source1: 	tftp-xinetd
+Patch0:		tftp-mips.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -34,6 +35,7 @@ and is disabled by default on a Mandriva Linux systems.
 %prep
 
 %setup -q  -n tftp-hpa-%{version}
+%patch0 -p1
 
 %build
 
