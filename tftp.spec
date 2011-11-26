@@ -1,11 +1,11 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
-Version: 	5.0
-Release: 	%mkrel 6
+Version: 	5.1
+Release: 	1
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
-Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.gz
+Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
