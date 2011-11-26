@@ -8,7 +8,6 @@ URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
@@ -33,12 +32,10 @@ expressly needed. The TFTP server is run from %{_sysconfdir}/xinetd.d/tftp,
 and is disabled by default on a Mandriva Linux systems.
 
 %prep
-
 %setup -q  -n tftp-hpa-%{version}
 %patch0 -p1
 
 %build
-
 %serverbuild
 
 sh configure --prefix=%{_prefix}
@@ -52,8 +49,6 @@ perl -pi -e '
 %make
 
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man{1,8}
 mkdir -p %{buildroot}%{_sbindir}
@@ -67,9 +62,6 @@ install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 
 %preun server
 %_preun_service %{name}
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
