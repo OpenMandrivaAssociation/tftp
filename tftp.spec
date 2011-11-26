@@ -8,6 +8,14 @@ URL:		http://www.kernel.org/pub/software/network/tftp/
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
+Patch1:		tftp-0.40-remap.patch
+Patch2:		tftp-hpa-0.39-tzfix.patch
+Patch3:		tftp-0.42-tftpboot.patch
+Patch4:		tftp-0.49-chk_retcodes.patch
+Patch5:		tftp-hpa-0.49-fortify-strcpy-crash.patch
+Patch6:		tftp-0.49-cmd_arg.patch
+Patch7:		tftp-hpa-0.49-stats.patch
+BuildRequires:	tcp_wrappers-devel readline-devel
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
@@ -34,17 +42,19 @@ and is disabled by default on a Mandriva Linux systems.
 %prep
 %setup -q  -n tftp-hpa-%{version}
 %patch0 -p1
+%patch1 -p1 -b .zero~
+%patch2 -p1 -b .tzfix~
+%patch3 -p1 -b .tftpboot~
+%patch4 -p1 -b .chk_retcodes~
+%patch5 -p1 -b .fortify-strcpy-crash~
+%patch6 -p1 -b .cmd_arg~
+%patch7 -p1 -b .stats~
+autoreconf
 
 %build
 %serverbuild
 
-sh configure --prefix=%{_prefix}
-perl -pi -e '
-    s,^CC=.*$,CC=cc,;
-    s,^BINDIR=.*$,BINDIR=%{_bindir},;
-    s,^MANDIR=.*$,MANDIR=%{_mandir},;
-    s,^SBINDIR=.*$,SBINDIR=%{_sbindir},;
-    ' MCONFIG
+%configure2_5x
 
 %make
 
