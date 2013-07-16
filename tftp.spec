@@ -1,14 +1,21 @@
 Summary: 	The client and server for the Trivial File Transfer Protocol (TFTP)
 Name: 		tftp
-Version: 	5.0
-Release: 	%mkrel 8
+Version: 	5.1
+Release: 	1
 License: 	BSD
 Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/
-Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa-%{version}.tar.gz
+Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1: 	tftp-xinetd
 Patch0:		tftp-mips.patch
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Patch1:		tftp-0.40-remap.patch
+Patch2:		tftp-hpa-0.39-tzfix.patch
+Patch3:		tftp-0.42-tftpboot.patch
+Patch4:		tftp-0.49-chk_retcodes.patch
+Patch5:		tftp-hpa-0.49-fortify-strcpy-crash.patch
+Patch6:		tftp-0.49-cmd_arg.patch
+Patch7:		tftp-hpa-0.49-stats.patch
+BuildRequires:	tcp_wrappers-devel readline-devel
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
@@ -33,27 +40,25 @@ expressly needed. The TFTP server is run from %{_sysconfdir}/xinetd.d/tftp,
 and is disabled by default on a Mandriva Linux systems.
 
 %prep
-
 %setup -q  -n tftp-hpa-%{version}
 %patch0 -p1
+%patch1 -p1 -b .zero~
+%patch2 -p1 -b .tzfix~
+%patch3 -p1 -b .tftpboot~
+%patch4 -p1 -b .chk_retcodes~
+%patch5 -p1 -b .fortify-strcpy-crash~
+%patch6 -p1 -b .cmd_arg~
+%patch7 -p1 -b .stats~
+autoreconf
 
 %build
-
 %serverbuild
 
-sh configure --prefix=%{_prefix}
-perl -pi -e '
-    s,^CC=.*$,CC=cc,;
-    s,^BINDIR=.*$,BINDIR=%{_bindir},;
-    s,^MANDIR=.*$,MANDIR=%{_mandir},;
-    s,^SBINDIR=.*$,SBINDIR=%{_sbindir},;
-    ' MCONFIG
+%configure2_5x
 
 %make
 
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_mandir}/man{1,8}
 mkdir -p %{buildroot}%{_sbindir}
@@ -67,9 +72,6 @@ install -m644 %{SOURCE1} -D %{buildroot}%{_sysconfdir}/xinetd.d/tftp
 
 %preun server
 %_preun_service %{name}
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -85,7 +87,14 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri May 06 2011 Oden Eriksson <oeriksson@mandriva.com> 5.0-6mdv2011.0
+* Sat Nov 26 2011 Per Øyvind Karlsen <peroyvind@mandriva.org> 5.1-1
++ Revision: 733628
+- sync with fedora patches
+- enable tcp_wrappers & readline support
+- remove old junk
+- new version
+
+* Fri May 06 2011 Oden Eriksson <oeriksson@mandriva.com> 5.0-6
 + Revision: 670679
 - mass rebuild
 
@@ -97,7 +106,7 @@ rm -rf %{buildroot}
 + Revision: 520282
 - rebuilt for 2010.1
 
-* Mon Sep 28 2009 Olivier Blin <oblin@mandriva.com> 5.0-3mdv2010.0
+* Mon Sep 28 2009 Olivier Blin <blino@mandriva.org> 5.0-3mdv2010.0
 + Revision: 450387
 - fix __progname usage for mips build (from Arnaud Patard)
 
@@ -128,7 +137,7 @@ rm -rf %{buildroot}
 + Revision: 179647
 - rebuild
 
-  + Olivier Blin <oblin@mandriva.com>
+  + Olivier Blin <blino@mandriva.org>
     - restore BuildRoot
 
   + Thierry Vignaud <tv@mandriva.org>
