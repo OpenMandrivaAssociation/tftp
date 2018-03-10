@@ -4,7 +4,7 @@ Requires=tftp.socket
 Documentation=man:in.tftpd
 
 [Service]
-ExecStart=/usr/sbin/in.tftpd -s /var/lib/tftpboot
+ExecStart=/usr/sbin/in.tftpd -s /srv/tftp
 StandardInput=socket
 
 [Install]

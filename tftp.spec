@@ -52,7 +52,8 @@ autoheader
 %serverbuild
 %configure
 
-%make
+# Doesn't like parallel builds...
+make
 
 %install
 mkdir -p %{buildroot}%{_bindir}
