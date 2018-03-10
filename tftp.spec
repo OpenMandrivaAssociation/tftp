@@ -7,7 +7,10 @@ Group: 		System/Servers
 URL:		http://www.kernel.org/pub/software/network/tftp/tftp-hpa
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1:	https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp.socket
-Source2:	https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp.service
+# NOTE: This is ***NOT*** Fedora's service file.
+# It has been updated to follow filesystem standards
+# and serve stuff from /srv/tftp rather than /var/lib/tftpboot.
+Source2:	tftp.service
 Patch1:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-0.40-remap.patch
 Patch2:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-hpa-0.39-tzfix.patch
 Patch3:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-0.42-tftpboot.patch
