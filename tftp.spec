@@ -22,6 +22,8 @@ Patch8:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-hpa-5.2-pktin
 Patch9:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-doc.patch
 Patch10:	https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-enhanced-logging.patch
 BuildRequires:	tcp_wrappers-devel readline-devel
+# For _unitdir
+BuildRequires:	systemd
 
 %description
 The Trivial File Transfer Protocol (TFTP) is normally used only for booting
