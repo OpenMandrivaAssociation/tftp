@@ -46,7 +46,7 @@ and is disabled by default on a Mandriva Linux systems.
 
 %prep
 %setup -q  -n tftp-hpa-%{version}
-%apply_patches
+%autopatch -p1
 ./autogen.sh
 autoheader
 
