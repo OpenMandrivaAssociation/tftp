@@ -4,7 +4,7 @@ Version: 	5.2
 Release: 	4
 License: 	BSD
 Group: 		System/Servers
-URL:		http://www.kernel.org/pub/software/network/tftp/tftp-hpa
+URL:		https://www.kernel.org/pub/software/network/tftp/tftp-hpa
 Source0: 	http://www.kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-%{version}.tar.xz
 Source1:	https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp.socket
 # NOTE: This is ***NOT*** Fedora's service file.
