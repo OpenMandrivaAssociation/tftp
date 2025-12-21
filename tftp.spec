@@ -21,6 +21,11 @@ Patch7:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-hpa-0.49-stat
 Patch8:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-hpa-5.2-pktinfo.patch
 Patch9:		https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-doc.patch
 Patch10:	https://src.fedoraproject.org/rpms/tftp/raw/master/f/tftp-enhanced-logging.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	tcp_wrappers-devel readline-devel
 # For _unitdir
 BuildRequires:	systemd
